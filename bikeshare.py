@@ -89,7 +89,6 @@ def load_data(city, month, day):
     # filter by month if applicable
     if month != 'all':
         # use the index of the months list to get the corresponding int
-        
         month =MONTHS.index(month) + 1
 
         # filter by month to create the new dataframe
@@ -132,7 +131,6 @@ def time_stats(df):
     popular_hour = df['hour'].mode()[0]
     print('Most Popular Start Hour:', popular_hour)
 
-
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -170,7 +168,6 @@ def trip_duration_stats(df):
     df['Travel Time'] = pd.to_datetime(df['End Time']) - pd.to_datetime(df['Start Time'])
     total_travel_time = df['Travel Time'].sum()
     print('Total Travel Time:', total_travel_time)
-    
 
     #display mean travel time
     mean_travel_time = df['Travel Time'].mean()
@@ -190,7 +187,6 @@ def user_stats(df):
     user_types = df['User Type'].value_counts()
     for x in range(len(user_types.axes[0])):     
         print('user type %s has %s counts' % (user_types.axes[0][x] ,user_types.values[x]))
-    
 
     #Display counts of gender
     if 'Gender' in df.keys():
@@ -202,11 +198,11 @@ def user_stats(df):
 
     if 'Birth Year' in df.keys():
         #Display earliest, most recent, and most common year of birth
-        earliest_birthyear = df['Birth Year'].min()
-        print('earliest birthyear is %s' % int(earliest_birthyear))
+        oldest_biker = df['Birth Year'].min()
+        print('oldest biker birthyear is %s' % int(oldest_biker))
 
-        mostrecent_birthyear = df['Birth Year'].max()
-        print('most recent birthyear is %s' % int(mostrecent_birthyear))
+        youngest_biker = df['Birth Year'].max()
+        print('youngest biker birthyear is %s' % int(youngest_biker))
 
         mostcommon_birthyear = df['Birth Year'].mode()
         print('most common birthyear is %s' % int(mostcommon_birthyear))
