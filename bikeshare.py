@@ -114,7 +114,7 @@ def time_stats(df):
     df['Start Time'] = pd.to_datetime(df['Start Time'])
     # extract hour from the Start Time column to create an hour column
     df['month'] = df['Start Time'].dt.month
-    # find the most popular hour
+    # find the most popular month
     popular_month = df['month'].mode()[0]
     print('Most Popular Month:', MONTHS[popular_month-1])
 
@@ -198,7 +198,7 @@ def user_stats(df):
         for x in range(len(genders.axes[0])):     
             print('gender %s has %s counts' % (genders.axes[0][x] ,genders.values[x]))
     else:
-        print('no Gender available in data')
+        print('no Gender-data available in data')
 
     if 'Birth Year' in df.keys():
         #Display earliest, most recent, and most common year of birth
@@ -216,6 +216,10 @@ def user_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
+    
+def display_data(df):
+    """Displays raw data on bikeshare users."""
+    print(df.iloc[:5])
 
 
 def main():
@@ -231,7 +235,14 @@ def main():
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
-
+    
+    while True:
+        wantToSeeRawData = input('\nDo you want to see 5 lines of raw data? Enter yes or no.\n')
+        if wantToSeeRawData.lower() == 'no':
+            break
+        #to clear up own data-frame columns, fresh data load
+        df = load_data(city, month, day)
+        display_data(df)
 
 if __name__ == "__main__":
 	main()
