@@ -218,7 +218,12 @@ def user_stats(df):
 
     
 def display_data(df):
-    """Displays raw data on bikeshare users."""
+    """
+    Displays raw data on bikeshare users.
+    
+    Args:
+        df - Pandas DataFrame containing unfiltered city data
+    """
     print(df.iloc[:5])
 
 
